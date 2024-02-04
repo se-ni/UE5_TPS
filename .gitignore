@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/TPS_Project/TPS_Project.sln
+/TPS_Project/Binaries/Win64
+/TPS_Project/Intermediate
+/TPS_Project/Saved
