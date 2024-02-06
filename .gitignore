@@ -400,3 +400,6 @@ FodyWeavers.xsd
 /TPS_Project/Binaries/Win64
 /TPS_Project/Intermediate
 /TPS_Project/Saved
+/TPS_Project/Content/Fantastic_Village_Pack/maps/map_village_day_BuiltData.uasset
+/TPS_Project/Content/Fantastic_Village_Pack/maps/map_village_night_BuiltData.uasset
+/TPS_Project/Content/Fantastic_Village_Pack/maps/map_village_overview_BuiltData.uasset
