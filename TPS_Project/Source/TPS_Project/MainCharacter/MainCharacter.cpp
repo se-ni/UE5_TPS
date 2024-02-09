@@ -22,7 +22,6 @@ void AMainCharacter::BeginPlay()
 // Called every frame
 void AMainCharacter::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
 
 }
 
@@ -72,14 +71,13 @@ void AMainCharacter::MoveRight(float Val)
 	{
 		if (Controller)
 		{
-			//UE_LOG(LogTemp, Log, TEXT("%S(%u) %f"), __FUNCTION__, __LINE__, Val);
 			FRotator const ControlSpaceRot = Controller->GetControlRotation();
 			// transform to world space and add it
 			// 현재 내 회전을 가져와서 y축에 해당하는 축벡터를 얻어오는 것.
 			AddMovementInput(FRotationMatrix(ControlSpaceRot).GetScaledAxis(EAxis::Y), Val);
 
 			MainPlayerAniState = Val > 0.f ? EAniState::LeftMove : EAniState::RightMove;
-
+			UE_LOG(LogTemp, Log, TEXT("%S(%u) %f"), __FUNCTION__, __LINE__, Val);
 			return;
 		}
 	}
@@ -115,13 +113,15 @@ void AMainCharacter::MoveForward(float Val)
 
 			MainPlayerAniState = Val > 0.f ? EAniState::ForwardMove : EAniState::BackwardMove;
 
+			UE_LOG(LogTemp, Log, TEXT("%S(%u) %d"), __FUNCTION__, __LINE__, MainPlayerAniState);
+
 			if (MainPlayerAniState == EAniState::BackwardMove)
 			{
 				UCharacterMovementComponent* Move = Cast<UCharacterMovementComponent>(GetMovementComponent());
 				Move->MaxWalkSpeed = 500.0f;
 				// UE_LOG(LogTemp, Log, TEXT("%f"), Move->MaxWalkSpeed);
 			}
-			//UE_LOG(LogTemp, Log, TEXT("%S(%u) %d"), __FUNCTION__, __LINE__, MainPlayerAniState);
+			
 			return;
 		}
 	}
@@ -150,7 +150,6 @@ void AMainCharacter::LookUpAtRate(float Rate)
 
 void AMainCharacter::JumpAction()
 {
-	//UE_LOG(LogTemp, Log, TEXT("%S(%u)> %d"), __FUNCTION__, __LINE__, JumpCurrentCount);
 	Jump();
 
 	MainPlayerAniState = EAniState::JumpStart;
