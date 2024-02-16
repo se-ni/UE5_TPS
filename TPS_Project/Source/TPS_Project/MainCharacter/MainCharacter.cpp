@@ -10,6 +10,10 @@ AMainCharacter::AMainCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
+	// 컴포넌트는 언리얼의 CDO 때문에 무조건 생성자에서 만들어줘야한다
+	WeaponMesh->SetupAttachment(GetMesh(), TEXT("WeaponSocket")); // 생성한 무기 매쉬를 캐릭터 매쉬에 붙여준다
+
 }
 
 // Called when the game starts or when spawned
@@ -45,6 +49,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("PlayerLookUp", EKeys::MouseY, -1.f));
 
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping(TEXT("PlayerJumpAction"), EKeys::SpaceBar));
+		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping(TEXT("PlayerAttackAction"), EKeys::LeftMouseButton));
 
 	}
 
@@ -57,6 +62,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("PlayerLookUpRate", this, &AMainCharacter::LookUpAtRate);
 
 	PlayerInputComponent->BindAction("PlayerJumpAction", EInputEvent::IE_Pressed, this, &AMainCharacter::JumpAction);
+	PlayerInputComponent->BindAction("PlayerAttackAction", EInputEvent::IE_Pressed, this, &AMainCharacter::AttackAction);
 }
 
 void AMainCharacter::MoveRight(float Val)
@@ -153,4 +159,9 @@ void AMainCharacter::JumpAction()
 	Jump();
 
 	MainPlayerAniState = EAniState::JumpStart;
+}
+
+void AMainCharacter::AttackAction()
+{
+	MainPlayerAniState = EAniState::Attack;
 }

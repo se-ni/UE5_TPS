@@ -40,6 +40,11 @@ protected:
 	void LookUpAtRate(float Rate);
 
 	void JumpAction();
+	void AttackAction();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+		UStaticMeshComponent* WeaponMesh;
+
 private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pawn", meta = (AllowPrivateAccess = "true"))
