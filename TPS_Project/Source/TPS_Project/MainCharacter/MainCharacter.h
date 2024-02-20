@@ -32,6 +32,8 @@ public:
 	UPROPERTY(Category = "AnimationValue", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	TMap<EAniState, class UAnimMontage*> AllAnimations; // 애니메이션 상태에 따라 애니메이션 몽타주를 저장하는 Map
 
+	bool bIsAttacking = false;
+
 protected:
 	void MoveRight(float Val);
 	void MoveForward(float Val);
@@ -44,6 +46,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 		UStaticMeshComponent* WeaponMesh;
+
+	UPROPERTY(Category = "WeaponValue", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+		TArray<UStaticMesh*> WeaponArrays; // WeaponMesh 컴포넌트에서 이용할 WeaponMesh(스태틱 매쉬) 배열
 
 private:
 
