@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "../Global/GlobalEnums.h"
+#include "../Global/GlobalGameInstance.h"
 #include "MainCharacter.generated.h"
 
 

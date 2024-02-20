@@ -10,10 +10,10 @@ AMainCharacter::AMainCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 	// 컴포넌트는 언리얼의 CDO 때문에 무조건 생성자에서 만들어줘야한다
-	WeaponMesh->SetupAttachment(GetMesh(), TEXT("WeaponSocket")); // 생성한 무기 매쉬를 캐릭터 매쉬에 붙여준다
+	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 
+	WeaponMesh->SetupAttachment(GetMesh(), TEXT("WeaponSocket")); // 생성한 무기 매쉬를 캐릭터 매쉬에 붙여준다
 }
 
 // Called when the game starts or when spawned
@@ -21,7 +21,15 @@ void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
+
+	//내가 DT_PlayerWeaponData 에서 만들어준 Row과 동일한 이름으로 매쉬를 가져온 뒤 UStaticMesh*형의 배열에 하나씩 추가해준다
+	WeaponArrays.Add(GetGameInstance<UGlobalGameInstance>()->GetMesh(TEXT("Weapon1")));
+	WeaponArrays.Add(GetGameInstance<UGlobalGameInstance>()->GetMesh(TEXT("Weapon2")));
+
+	WeaponMesh->SetStaticMesh(WeaponArrays[0]); // Weapon1(총) 매쉬를 Weapon Mesh로 설정하겠다는 코드
 }
+
 
 // Called every frame
 void AMainCharacter::Tick(float DeltaTime)
