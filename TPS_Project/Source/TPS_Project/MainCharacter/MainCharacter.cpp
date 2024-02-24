@@ -27,7 +27,7 @@ void AMainCharacter::BeginPlay()
 	WeaponArrays.Add(GetGameInstance<UGlobalGameInstance>()->GetMesh(TEXT("Weapon1")));
 	WeaponArrays.Add(GetGameInstance<UGlobalGameInstance>()->GetMesh(TEXT("Weapon2")));
 
-	WeaponMesh->SetStaticMesh(WeaponArrays[0]); // Weapon1(총) 매쉬를 Weapon Mesh로 설정하겠다는 코드
+	WeaponMesh->SetStaticMesh(WeaponArrays[1]); // Weapon1(총) 매쉬를 Weapon Mesh로 설정하겠다는 코드
 }
 
 
